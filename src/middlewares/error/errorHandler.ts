@@ -23,7 +23,7 @@ export const errorHandler = (
         if (err.isOperational && req.user) {
             LogService.createLog(
                 LogLevel.ERROR,
-                LogAction.UPDATE
+                LogAction.UPDATE,
                 req.user,
                 'error',
                 err.message,
