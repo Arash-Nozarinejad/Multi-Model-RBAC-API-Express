@@ -1,6 +1,9 @@
+import 'reflect-metadata'
 import express, { Response, Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import config from './config/env.config';
+import { initializeDatabase } from './config/typeorm.config';
 
 const app: Express = express();
 
@@ -13,12 +16,20 @@ app.get('/', (res: Response) => {
     res.json({ message: 'RBAC API is running!'});
 });
 
-import config from './config/env.config';
-
 const PORT = config.port;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+const startServer = async () => {
+    try {
+        await initializeDatabase();
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    } catch (error) {
+        process.exit(1);
+    }
+}
+
+startServer();
 
 export default app;
