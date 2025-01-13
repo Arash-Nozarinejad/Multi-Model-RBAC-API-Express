@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import config from './config/env.config';
 import { initializeDatabase } from './config/database.utils';
+import { initializeMongoDB } from './config/mongoose.config';
 
 const app: Express = express();
 
@@ -20,7 +21,10 @@ const PORT = config.port;
 
 const startServer = async () => {
     try {
-        await initializeDatabase();
+        await Promise.all([
+            initializeDatabase(),
+            initializeMongoDB()
+        ]);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
