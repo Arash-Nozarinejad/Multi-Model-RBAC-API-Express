@@ -3,7 +3,7 @@ import express, { Response, Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import config from './config/env.config';
-import { initializeDatabase } from './config/typeorm.config';
+import { initializeDatabase } from './config/database.utils';
 
 const app: Express = express();
 

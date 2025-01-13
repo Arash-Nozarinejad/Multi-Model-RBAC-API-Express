@@ -10,16 +10,10 @@ const AppDataSource = new DataSource({
     password: config.postgres.password,
     database: config.postgres.database,
     synchronize: config.node_env === 'development',
-    logging: config.node_env === ' development',
+    logging: config.node_env === 'development',
     entities: [path.join(__dirname, '../entities/**/*.{ts,js}')],
     migrations: [path.join(__dirname, '../migrations/**/*.{ts,js}')],
     subscribers: [path.join(__dirname, '../subscribers/**/*.{ts,js}')],
 });
 
-export const initializeDatabase = async () => {
-    try {
-        await AppDataSource.initialize();
-    } catch (error) {
-        throw error;
-    }
-};
+export default AppDataSource;
