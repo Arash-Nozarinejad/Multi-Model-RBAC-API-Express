@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AppError } from "src/middlewares/error/errorHandler";
+import authRoutes from './auth.routes';
 
 const router = Router();
 
@@ -17,6 +18,8 @@ router.get('/version', (_, res) => {
         environment: process.env.NODE_ENV,
     });
 });
+
+router.use('/auth', authRoutes);
 
 router.get('/', (_, res) => {
     res.status(200).json({
