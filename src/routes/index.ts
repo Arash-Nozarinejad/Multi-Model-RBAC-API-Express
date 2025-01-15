@@ -2,6 +2,7 @@ import { Router } from "express";
 import { AppError } from "src/middlewares/error/errorHandler";
 import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
+import postRoutes from './post.routes';
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.get('/version', (_, res) => {
 
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
+router.use('/posts', postRoutes);
 
 router.get('/', (_, res) => {
     res.status(200).json({
