@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AppError } from "src/middlewares/error/errorHandler";
 import authRoutes from './auth.routes';
+import userRoutes from './user.routes';
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.get('/version', (_, res) => {
 });
 
 router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
 
 router.get('/', (_, res) => {
     res.status(200).json({
